@@ -16,7 +16,7 @@ class TaskController < ApplicationController
     else
       @max_seg = 0
       arr = str.split(' ').map(&:to_i)
-      p @segments = get_segments(arr)
+      @segments = get_segments(arr)
       @max_seg = (@segments.max_by { |elem| elem[:length] })[:segment] unless @segments.nil? || @segments.empty?
       @count = @segments.length
       @start = str
@@ -25,6 +25,11 @@ class TaskController < ApplicationController
       res.save
       @was_created = true
     end
+  end
+
+  def calculations
+    @calcs = Calculation.all
+    render xml: @calcs
   end
 
   private
