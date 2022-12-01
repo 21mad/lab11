@@ -1,0 +1,21 @@
+<h1>Task#show</h1>
+<p id="array">Изначальный массив: <%= @start %></p>
+<p id="count">Количество отрезков: <%= @count %></p>
+<p id="max_seg">Самый длинный отрезок: <%= @max_seg %></p>
+<table id ="segments" style="border: 1px solid black">
+<tr><th>Длина</th><th>Отрезок</th></tr>
+<% if keys = @segments[0].keys %>
+    <% @segments.each do |seg| %>
+        <tr><td><%= seg[keys[0]] %></td><td><%= seg[keys[1]] %></td></tr>
+    <%end%>
+<%end%>
+<table>
+<p id="from">
+<% if @was_created == false %>
+    <%= 'Вычисления были взяты из БД.' %>
+<% else %>
+    <%= 'Вычисления были произведены впервые.' %>
+<% end %>
+</p>
+
+<%= link_to 'Вернуться на страницу ввода', root_path%>
