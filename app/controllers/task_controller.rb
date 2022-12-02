@@ -22,8 +22,8 @@ class TaskController < ApplicationController
       @start = str
       res = Calculation.create :array => str, :max_seg => ActiveSupport::JSON::encode( @max_seg ), :seg_count => @count,
       :segments => ActiveSupport::JSON::encode( @segments )
-      res.save
       @was_created = true
+      res.save
     end
   end
 
