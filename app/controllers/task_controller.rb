@@ -14,14 +14,19 @@ class TaskController < ApplicationController
       @start = res.array
       @was_created = false
     else
+      str
       @max_seg = 0
       arr = str.split(' ').map(&:to_i)
       @segments = get_segments(arr)
       @max_seg = (@segments.max_by { |elem| elem[:length] })[:segment] unless @segments.nil? || @segments.empty?
       @count = @segments.length
       @start = str
-      res = Calculation.create :array => str, :max_seg => ActiveSupport::JSON::encode( @max_seg ), :seg_count => @count,
-      :segments => ActiveSupport::JSON::encode( @segments )
+      res = Calculation.create(
+        array: str, 
+        seg_count: @count, 
+        max_seg: ActiveSupport::JSON::encode( @max_seg ), 
+        segments: ActiveSupport::JSON::encode( @segments ),
+      )
       @was_created = true
       res.save
     end
